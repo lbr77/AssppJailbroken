@@ -4,13 +4,13 @@ DEVICE_HOST ?=
 THEOS ?= $(HOME)/theos
 THEOS_PACKAGE_SCHEME ?= rootless
 THEOS_PACKAGE_DIR_NAME ?= debs
-TARGET := iphone:clang:latest:13.0
+TARGET := iphone:clang:latest:15.0
 ARCHS := arm64
 
 PACKAGE_NAME := wiki.qaq.unfaird
 EXECUTABLE_NAME := UnfairDaemon
 BUILD_INFO := Sources/UnfairDaemonCore/BuildInfo.swift
-IOS_TARGET := arm64-apple-ios13.0
+IOS_TARGET := arm64-apple-ios15.0
 IOS_BUILD_DIR := .build/ios-release
 ASSPPWEB_DIR ?= ..
 ASSPPWEB_FRONTEND_DIST := $(ASSPPWEB_DIR)/frontend/dist
@@ -21,14 +21,7 @@ LDID := $(THEOS)/bin/ldid
 endif
 SWIFT_STDLIB_TOOL ?= $(shell xcrun --find swift-stdlib-tool 2>/dev/null)
 
-IOS_SWIFT_FLAGS := \
-	-Xswiftc -sdk -Xswiftc "$(IPHONEOS_SDK_PATH)" \
-	-Xswiftc -target -Xswiftc $(IOS_TARGET) \
-	-Xcc -arch -Xcc arm64 \
-	-Xcc --target=$(IOS_TARGET) \
-	-Xcc -isysroot -Xcc "$(IPHONEOS_SDK_PATH)" \
-	-Xcc -mios-version-min=13.0 \
-	-Xcc -miphoneos-version-min=13.0
+IOS_SWIFT_FLAGS := --triple $(IOS_TARGET) --sdk "$(IPHONEOS_SDK_PATH)"
 
 .PHONY: all build release ios-release assppweb-frontend mac-install mac-uninstall generate-build-info clean-package
 

@@ -148,8 +148,9 @@ export function countryToStoreId(country: string): string | undefined {
 }
 
 export function storeIdToCountry(storeId: string): string | undefined {
+  const normalizedStoreId = storeId.split("-")[0];
   for (const [code, id] of Object.entries(countryCodeMap)) {
-    if (id === storeId) return code;
+    if (id === normalizedStoreId) return code;
   }
   return undefined;
 }

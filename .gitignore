@@ -69,6 +69,7 @@
 .serverless/
 .swiftpm
 .tern-port
+.tmp/
 .vscode-test
 .vuepress/dist
 .yarn-integrity
